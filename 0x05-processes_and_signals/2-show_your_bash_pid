@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Show your Bash PID task
+
+ps -a -x -u -f | grep "bash"

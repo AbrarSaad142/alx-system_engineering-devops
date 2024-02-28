@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#  Don't stop me now! task
+kill "$(ps -x | pgrep -f beyond)"

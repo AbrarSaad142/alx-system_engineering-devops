@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#  Don't stop me now! task
+pkill -f beyond
