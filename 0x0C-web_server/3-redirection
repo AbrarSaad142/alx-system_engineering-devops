@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-#3. Redirection
+# 3. Redirection
 sudo apt-get update -y
 sudo apt-get install nginx -y
 sudo ufw allow "Nginx HTTP"
-sudo echo 'Hello World!' > /var/www/html/index.nginx-debian.html
-sudo sed -i '24i\       rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+if ! grep -q 'location /redirect_me {' /etc/nginx/sites-available/default; then
+    sudo sed -i '/server_name _;/ a\\n        location /redirect_me {\n                return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n        }' /etc/nginx/sites-available/default
+fi
 sudo service nginx restart
