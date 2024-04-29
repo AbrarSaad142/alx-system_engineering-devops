@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# configure a brand new NGINX server
+sudo apt-get update -y
+sudo apt-get install nginx -y
+sudo chown -R $USER:www-data /var/www
+echo "Hello World!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/not_found_page_404.html
+if ! grep -q 'location /redirect_me {' /etc/nginx/sites-available/default; then
+    sudo sed -i '/server_name _;/ a\\n        location /redirect_me {\n                return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n        }' /etc/nginx/sites-available/default
+fi
+
+if ! grep -q 'error_page 404' /etc/nginx/sites-available/default; then
+    sudo sed -i '/server_name _;/ a\\n        error_page 404 /not_found_page_404.html;\n        location = /not_found_page_404.html {\n                root /var/www/html;\n                internal;\n        }\n' /etc/nginx/sites-available/default
+fi
+
+if ! grep -q 'X-Served-By' /etc/nginx/sites-available/default; then
+    # sudo sed -i '/location \/ {/,$!b;//!b;a\                add_header X-Served-By '"${HOSTNAME}"';' /etc/nginx/sites-available/default
+    sudo sed -i '/First attempt to serve request as file, then/ a\                add_header X-Served-By '"${HOSTNAME}"';' /etc/nginx/sites-available/default
+fi
+
+sudo service nginx restart
+
+sudo service nginx status
