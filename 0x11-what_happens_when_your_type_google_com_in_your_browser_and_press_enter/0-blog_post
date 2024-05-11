@@ -1,0 +1,25 @@
+When you type "https://www.google.com" into your browser and hit Enter, a fascinating journey begins, traversing various layers of the internet stack.
+
+DNS Request:
+The journey starts with a Domain Name System (DNS) request. Your browser needs to translate the human-readable domain name "www.google.com" into an IP address that computers understand. It sends a DNS query to a DNS resolver, which might be your ISP's resolver or a public resolver like Google's 8.8.8.8. The resolver then looks up the IP address associated with the domain name.
+
+TCP/IP:
+With the IP address obtained, your browser initiates a Transmission Control Protocol (TCP) connection to the IP address over the Internet Protocol (IP). TCP ensures reliable, ordered, and error-checked delivery of data packets between your computer and the server.
+
+Firewall:
+As the data packets traverse the network, they may encounter firewalls—a security measure designed to monitor and control incoming and outgoing network traffic based on predetermined security rules. Firewalls can block or allow packets based on various criteria, protecting against unauthorized access or malicious activity.
+
+HTTPS/SSL:
+In the case of accessing a secure website like "https://www.google.com," an extra layer of security is added through HTTPS (Hypertext Transfer Protocol Secure) and SSL (Secure Sockets Layer) or its successor, TLS (Transport Layer Security). HTTPS encrypts the data exchanged between your browser and the server, ensuring privacy and integrity. Upon establishing a TCP connection, your browser performs an SSL handshake with the server to negotiate encryption parameters and exchange cryptographic keys.
+
+Load-Balancer:
+Large websites like Google typically employ load balancers to distribute incoming traffic across multiple servers, ensuring scalability, high availability, and optimal performance. When your request reaches Google's infrastructure, it may encounter a load balancer that forwards the request to one of many backend servers based on predefined algorithms or configurations.
+
+Web Server:
+Once the request reaches the appropriate web server, such as one hosting Google's search engine, the server processes the request. It may generate dynamic content, interact with databases, or execute other backend logic based on the request parameters.
+
+Application Server:
+In some cases, especially for complex web applications, the web server may delegate certain tasks to an application server. The application server handles business logic, session management, and other application-specific tasks, interacting with databases or other services as needed.
+
+Database:
+If the request involves retrieving or storing data, the application server may communicate with a database server. The database server retrieves or manipulates data stored in databases, such as user information, search results, or other relevant data, before returning the response to the application server.
